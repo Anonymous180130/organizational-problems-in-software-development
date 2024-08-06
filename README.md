@@ -14,3 +14,6 @@ Describes in detail some of the findings summarised from our detailed analysis o
 5.Specific case descriptions:
 Further detailed descriptions of the cases in the thesis, with clearer case modelling diagrams and task-driven zoom-in diagrams.
 
+6.ComplexityComputionProject:
+Contains code files for complexity computation.
+
