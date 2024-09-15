@@ -17,3 +17,6 @@ Further detailed descriptions of the cases in the thesis, with clearer case mode
 6.ComplexityComputionProject:
 Contains code files for complexity computation.
 
+7.Question framework enhancements:
+The problem framing approach and its underlying concepts are introduced and explained concretely through a zoom-in case.
+
