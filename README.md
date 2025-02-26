@@ -15,7 +15,7 @@ Describes in detail some of the findings summarised from our detailed analysis o
 Further detailed descriptions of the cases in the thesis, with clearer case modelling diagrams and task-driven zoom-in diagrams.
 
 6.ComplexityComputionProject:
-Contains code files for complexity computation.
+Contains code files for complexity calculations and causal analysis for EFA, CFA.
 
 7.Question framework enhancements:
 The problem framing approach and its underlying concepts are introduced and explained concretely through a zoom-in case.
