@@ -79,13 +79,16 @@ def factorCompution():
 
     # 创建一个20x20的DataFrame，索引和列名从1开始，实际索引从0开始
     df = pd.DataFrame(index=range(20), columns=range(20))
-    df = df.fillna(0)
+    df = df.fillna(0.00)
 
     import numpy as np
 
     # 初始化权重向量及复杂度向量
-    vector1 = np.array([0.2, 0.1, 0.15, 0.3, 0.1, 0.02, 0.1, 0.01, 0.02])
-    vector2 = np.array([3, 3, 4, 5, 3, 3, 4, 3, 1])
+    # vector1 = np.array([0.2, 0.1, 0.15, 0.3, 0.1, 0.02, 0.1, 0.01, 0.02])
+    # vector2 = np.array([3, 3, 4, 5, 3, 3, 4, 3, 1])
+
+    vector1 = np.array([0.3, 0.5, 0.2])
+    vector2 = np.array([4, 4, 5])
 
     # 计算点积
     f = np.dot(vector1, vector2)
@@ -98,8 +101,8 @@ def factorCompution():
     # 填充邻接矩阵
     for edge in edges:
         u, v, k = edge  # 节点编号从1开始，需要减1以匹配Pandas的索引
-        df.at[u - 1, v - 1] = 1*k*f
-        df.at[v - 1, u - 1] = 1*k*f  # 因为是无向图，所以需要填充两个方向
+        df.at[u - 1, v - 1] = float(1*k*f)
+        df.at[v - 1, u - 1] = float(1*k*f)  # 因为是无向图，所以需要填充两个方向
 
     # 转换为NumPy数组，并确保数据类型为float64
     adjacency_matrix = df.to_numpy(dtype='float64')
@@ -113,10 +116,39 @@ def factorCompution():
 
 # 按装订区域中的绿色按钮以运行脚本。
 if __name__ == '__main__':
+
+    # # 设置pandas显示选项，显示所有行和列
+    pd.set_option('display.max_rows', None)
+    pd.set_option('display.max_columns', None)
+    pd.set_option('display.width', None)
+    pd.set_option('display.max_colwidth', None)
+
     sum1 = singularCompution()
     sum2, matrix1 = communicationCompution()
     sum3, matrix2 = factorCompution()
     sum = (sum1+sum2+sum3)
     sum_matrix = matrix1 + matrix2
     print("总复杂度：",sum)
-    print("每对之间复杂度矩阵：", sum_matrix)
+    print("每对之间复杂度矩阵：\n", sum_matrix)
+
+    # 创建带数字索引(1-20)的DataFrame
+    sum_matrix_df = pd.DataFrame(
+        sum_matrix, 
+        index=range(1, 21),  # 1到20的索引
+        columns=range(1, 21),  # 1到20的列名
+        dtype='float64'
+    ).round(3)
+    print("\n每对之间复杂度矩阵：")
+    print(sum_matrix_df)
+
+    # 创建带索引的DataFrame来显示sum_matrix
+    # roles = [
+    #     'A-CDO', 'A-Technical Manager', 'A-Innovation Manager', 'A-Operation1',
+    #     'A-Operation2', 'A-ProjectManager', 'A-IT manager', 'A-IT Development',
+    #     'C-CTO', 'C-Domain Expert', 'C-Data Team', 'B-Project Manager',
+    #     'B-algorithm engineer', 'B-AI Architect', 'B-pre-sales', 'B-Engineering Manager',
+    #     'B-Product Manager', 'B-frontend development', 'B-backend development', 'B-Test Deployment'
+    # ]
+    # sum_matrix_df = pd.DataFrame(sum_matrix, index=roles, columns=roles)
+    # print("\n每对之间复杂度矩阵：")
+    # print(sum_matrix_df)
